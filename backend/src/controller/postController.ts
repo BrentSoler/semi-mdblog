@@ -20,6 +20,15 @@ export const postPost = asyncHandler(async (req: Request, res: Response) => {
 	});
 
 	if (findPost) {
+		const cloud = cloudinary.v2;
+
+		cloud.config({
+			cloud_name: process.env.CLOUDINARY_CLOUD,
+			api_key: process.env.CLOUDINARY_API,
+			api_secret: process.env.CLOUDINARY_SECRET,
+		});
+
+		cloud.uploader.destroy(image_key as string, function (result) {});
 		res.status(400);
 		throwErr("Title already exists");
 	}

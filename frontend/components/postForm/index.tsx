@@ -12,11 +12,12 @@ const PostForm: React.FC<PostPageProps> = ({
 	const { title, body } = formData;
 
 	return (
-		<div className="w-[50%] p-5">
+		<div className="w-full p-5 justify-center">
 			<form className="flex flex-col gap-4 justify-center min-h-screen" onSubmit={onSubmit}>
 				<h1 className="font-semibold">Thumbnail:</h1>
 				<input
 					type="file"
+					name="file"
 					className="file:btn-primary file:rounded-md file:w-max file:py-3 file:px-5 file:cursor-pointer bg-base-300 rounded-md"
 					onChange={onImageChange}
 					accept=".png,.jpeg,.webp,.jpg"
