@@ -7,5 +7,5 @@ module.exports = {
 			fontFamily: { pop: ["Poppins"] },
 		},
 	},
-	plugins: [],
+	plugins: [require("daisyui"), require("@tailwindcss/typography")],
 };

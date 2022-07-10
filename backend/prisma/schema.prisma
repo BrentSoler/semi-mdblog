@@ -16,4 +16,5 @@ model Posts{
   body String
   image_url String
   image_key String
+  date_posted DateTime @default(now())
 }
