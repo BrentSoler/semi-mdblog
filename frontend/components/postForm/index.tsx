@@ -12,7 +12,7 @@ const PostForm: React.FC<PostPageProps> = ({
 	const { title, body } = formData;
 
 	return (
-		<div className="w-full p-5 justify-center">
+		<div className="w-full p-5">
 			<form className="flex flex-col gap-4 justify-center min-h-screen" onSubmit={onSubmit}>
 				<h1 className="font-semibold">Thumbnail:</h1>
 				<input
