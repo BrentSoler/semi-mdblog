@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { LayoutProps } from "../../interfaces/FcInterface";
 
 const NavBar: React.FC<LayoutProps> = ({ children }) => {
+	const router = useRouter();
+
 	return (
 		<div className="drawer drawer-end">
 			<input id="nav" type="checkbox" className="drawer-toggle" />
@@ -31,9 +34,16 @@ const NavBar: React.FC<LayoutProps> = ({ children }) => {
 					</label>
 
 					<ul className="sm:flex gap-3 mr-4 hidden">
-						<Link href="/">
-							<a>Create</a>
-						</Link>
+						{router.pathname !== "/create" && (
+							<Link href="/create">
+								<a>Create</a>
+							</Link>
+						)}
+						{router.pathname !== "/" && (
+							<Link href="/">
+								<a>Home</a>
+							</Link>
+						)}
 					</ul>
 				</div>
 				{children}
