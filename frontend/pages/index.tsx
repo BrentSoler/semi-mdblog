@@ -11,13 +11,13 @@ const Home: NextPage = () => {
 	return (
 		<div>
 			{isLoading && <Spinner />}
-			<div className="flex gap-5 p-5">
+			<div className="flex gap-5 p-5 flex-col lg:flex-row">
 				{isSuccess &&
 					data.map((blog) => (
 						<Cards
 							title={blog.title}
 							body={blog.body}
-							image={blog.image_url}
+							image_url={blog.image_url}
 							image_key={blog.image_key}
 							date_posted={blog.date_posted}
 							id={blog.id}
@@ -44,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 
 	return {
 		props: {
-			dehydratedState: dehydrate(queryClient),
+			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 		},
 	};
 };

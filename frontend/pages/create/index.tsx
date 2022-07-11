@@ -8,6 +8,7 @@ import { usePostBlog } from "../../hooks/usePost";
 import { postData } from "../../interfaces/ApiInterface";
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner";
+import { useRouter } from "next/router";
 
 const PostPage = () => {
 	const [formData, setFormData] = useState<formData>({
@@ -17,6 +18,7 @@ const PostPage = () => {
 	const [image, setImage] = useState<string>();
 	const [preview, setPreview] = useState<boolean>(false);
 	const { mutate, isLoading, isSuccess } = usePostBlog();
+	const router = useRouter();
 
 	const { title, body } = formData;
 
@@ -34,6 +36,7 @@ const PostPage = () => {
 				body: "",
 			});
 			setImage(undefined);
+			router.push("/");
 		}
 	}, [isSuccess]);
 
