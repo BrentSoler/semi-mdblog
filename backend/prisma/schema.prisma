@@ -17,4 +17,14 @@ model Posts{
   image_url String
   image_key String
   date_posted DateTime @default(now())
+  author User @relation(fields: [authorId],references: [id])
+  authorId Int
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  name String @unique
+  email String @unique
+  password String
+  posts Posts[]
 }

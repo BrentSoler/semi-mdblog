@@ -17,7 +17,7 @@ const Post = () => {
 		<>
 			{isLoading && <Spinner />}
 			{isSuccess && (
-				<div className="flex flex-col w-[80vw] pb-5 mx-auto overflow-hidden">
+				<div className="flex flex-col w-[60vw] pb-5 mx-auto overflow-hidden">
 					<div className="mt-5 mb-6 w-full text-center sm:text-left prose">
 						<div className="avatar flex items-center gap-2">
 							<div className="rounded-3xl">
@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 	return {
 		props: {
-			dehydratedState: dehydrate(queryClient),
+			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 		},
 	};
 };

@@ -9,9 +9,9 @@ const Home: NextPage = () => {
 	const { data, isLoading, isSuccess, isError, refetch } = useBlog();
 
 	return (
-		<div>
+		<div className="flex justify-center items-center">
 			{isLoading && <Spinner />}
-			<div className="flex gap-5 p-5 flex-col lg:flex-row">
+			<div className="flex gap-5 p-5 flex-col lg:flex-row flex-wrap justify-center">
 				{isSuccess &&
 					data.map((blog) => (
 						<Cards
@@ -21,6 +21,7 @@ const Home: NextPage = () => {
 							image_key={blog.image_key}
 							date_posted={blog.date_posted}
 							id={blog.id}
+							key={blog.id}
 						/>
 					))}
 			</div>

@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import * as cloudinary from "cloudinary";
 
+const prisma = new PrismaClient();
+
 export const postPost = asyncHandler(async (req: Request, res: Response) => {
 	const { title, image, body, image_key } = req.body;
 
@@ -10,8 +12,6 @@ export const postPost = asyncHandler(async (req: Request, res: Response) => {
 		res.status(400);
 		throwErr("Missing Fields");
 	}
-
-	const prisma = new PrismaClient();
 
 	const findPost = await prisma.posts.findFirst({
 		where: {
@@ -48,7 +48,6 @@ export const postPost = asyncHandler(async (req: Request, res: Response) => {
 export const getPost = asyncHandler(async (req: Request, res: Response) => {
 	const { id } = req.query;
 
-	const prisma = new PrismaClient();
 	if (id) {
 		const getPost = await prisma.posts.findUnique({
 			where: {
@@ -82,8 +81,6 @@ export const updatePost = asyncHandler(async (req: Request, res: Response) => {
 		res.status(400);
 		throwErr("please update atleast one field");
 	}
-
-	const prisma = new PrismaClient();
 
 	const getPost = await prisma.posts.findUnique({
 		where: {
@@ -143,8 +140,6 @@ export const deletePost = asyncHandler(async (req: Request, res: Response) => {
 		res.status(400);
 		throwErr("No id provided");
 	}
-
-	const prisma = new PrismaClient();
 
 	const getPost = await prisma.posts.findUnique({
 		where: {

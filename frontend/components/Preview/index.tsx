@@ -10,7 +10,7 @@ const Preview: React.FC<PreviewProps> = ({ formData, image_base64, state }) => {
 	return (
 		<div
 			className={`${
-				state ? "flex flex-col sm:w-[80vw]" : "hidden sm:flex sm:flex-col sm:w-[50%]"
+				state ? "flex flex-col sm:w-[60vw]" : "hidden sm:flex sm:flex-col sm:w-[50%]"
 			} pb-5 mx-auto`}
 		>
 			<div className="mt-5 mb-6 w-screen text-center sm:text-left prose ">
