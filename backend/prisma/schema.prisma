@@ -25,6 +25,8 @@ model User{
   id Int @id @default(autoincrement())
   name String @unique
   email String @unique
+  image_url String
+  image_key String
   password String
   posts Posts[]
 }

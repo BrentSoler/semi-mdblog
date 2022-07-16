@@ -2,11 +2,11 @@ import asyncHandler from "express-async-handler";
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import * as cloudinary from "cloudinary";
-
-const prisma = new PrismaClient();
+import prisma from "../config/prismaClient";
 
 export const postPost = asyncHandler(async (req: Request, res: Response) => {
 	const { title, image, body, image_key } = req.body;
+	const id = req.user!.id;
 
 	if (!title || !image || !body || !image_key) {
 		res.status(400);
@@ -39,6 +39,7 @@ export const postPost = asyncHandler(async (req: Request, res: Response) => {
 			body: body,
 			image_url: image,
 			image_key: image_key,
+			authorId: Number(id),
 		},
 	});
 
@@ -71,6 +72,7 @@ export const getPost = asyncHandler(async (req: Request, res: Response) => {
 export const updatePost = asyncHandler(async (req: Request, res: Response) => {
 	const { title, image, body, image_key } = req.body;
 	const { id } = req.query;
+	const userId = req.user!.id;
 
 	if (!id) {
 		res.status(400);
@@ -91,6 +93,11 @@ export const updatePost = asyncHandler(async (req: Request, res: Response) => {
 	if (!getPost) {
 		res.status(400);
 		throwErr("Post does not exists");
+	}
+
+	if (userId !== getPost!.authorId) {
+		res.status(400);
+		throwErr("You don't own this post");
 	}
 
 	if (title) {
@@ -135,6 +142,7 @@ export const updatePost = asyncHandler(async (req: Request, res: Response) => {
 
 export const deletePost = asyncHandler(async (req: Request, res: Response) => {
 	const { id } = req.query;
+	const userId = req.user!.id;
 
 	if (!id) {
 		res.status(400);
@@ -150,6 +158,11 @@ export const deletePost = asyncHandler(async (req: Request, res: Response) => {
 	if (!getPost) {
 		res.status(400);
 		throwErr("Post does not exists");
+	}
+
+	if (userId !== getPost!.authorId) {
+		res.status(400);
+		throwErr("You don't own this post");
 	}
 
 	const deleted = await prisma.posts.delete({
